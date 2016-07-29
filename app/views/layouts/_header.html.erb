@@ -1,0 +1,40 @@
+<header class="navbar navbar-default">
+  <div class="container">
+  <%= link_to "MyBlog", root_path, id: "logo"%>
+    <nav>
+      <ul class="nav navbar-nav">
+        <li><%= link_to t("menu.home"), root_path %></li>
+        <li><%= link_to t("menu.help"), static_pages_help_path %></li>
+        <li><%= link_to t("menu.users"), users_path %></li>
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+        <% if logged_in? %>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <div class="menu_avartar">
+                  <%= gravartar_for current_user %>
+                  <%= t("menu.acount") %><span class="caret"></span>
+                </div>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to t("menu.profile"), user_path(current_user.id) %></li>
+                <li><%= link_to t("menu.setting"), edit_user_path(current_user)%></li>
+                <li><%= link_to t("menu.logout"), logout_path, method: "delete" %></li>
+              </ul>
+            </li>
+        <% else %>
+            <li>
+              <%= link_to signup_path do %>
+                <span class="glyphicon glyphicon-user"> </span>_<%= t("menu.signup") %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to login_path do %>
+                <span class="glyphicon glyphicon-log-in"> </span>_<%= t("menu.login") %>
+              <% end %>
+            </li>
+        <% end %>
+        </ul>
+    </nav>
+  </div>
+</header>
